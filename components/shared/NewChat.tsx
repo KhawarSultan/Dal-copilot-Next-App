@@ -30,6 +30,7 @@ import MarkdownConversion from "../ui/markdown-conversion";
 // import { AiOutlineFilePdf } from "react-icons/ai";
 // import { GoDotFill } from "react-icons/go";
 // import MarkdownToHtml from '@/components/ui/markdownToHtml'
+import { useEffect, useRef } from 'react';
 
 import { useAI } from '@/hooks/useAI';
 import Ask_pdf from "../ui/ask_pdf";
@@ -99,8 +100,13 @@ const NewChat = () => {
   };
   console.log(detectLanguageClass('مرحبا، كيف حالك'));
   // console.log(detectLanguageClass('مرحبا، كيف حالك'));
-
-
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const lastMessageRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [AImessages, AIloading]);
 
   return (
     <>
@@ -176,14 +182,14 @@ const NewChat = () => {
 
             {ChangeToggle ?
               (AImessages?.length > 0 || AIloading) &&
-              <ScrollArea className={` flex flex-col w-full  my-2     xl:h-[67vh] lg:h-[60vh] h-[64vh] rounded-3xl`} >
-                {AImessages?.map((message: any) => {
+              <ScrollArea  className={` flex flex-col w-full  my-2     xl:h-[67vh] lg:h-[60vh] h-[64vh] rounded-3xl`} >
+                {AImessages?.map((message: any,index:number) => {
                   return (
-                    <div key={message.question} className={` w-full flex flex-col  space-y-2 `}  >
+                    <div  key={message.question} className={` w-full flex flex-col  space-y-2 `}  >
                       <p className={`${detectLanguageClass(message.question) } bg-dark-500  self-end  text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-4`}>
                         {message.question}
                       </p>
-                      <p className={`bg-dark-100 w-fit   rounded-tr-3xl rounded-bl-3xl rounded-br-3xl max-w-full px-6 py-2  text-wrap`} >
+                      <p  className={`bg-dark-100 w-fit   rounded-tr-3xl rounded-bl-3xl rounded-br-3xl max-w-full px-6 py-2  text-wrap`} >
                         <MarkdownConversion markdownContent={message.answer} speed={14} />
                       </p>
 
