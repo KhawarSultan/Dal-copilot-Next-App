@@ -93,6 +93,13 @@ const NewChat = () => {
 
 
 
+  const detectLanguageClass = (text: string): string => {
+    const arabicRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+    return arabicRegex.test(text) ? 'arabic-font text-sm  ' : 'english-font';
+  };
+  console.log(detectLanguageClass('مرحبا، كيف حالك'));
+  // console.log(detectLanguageClass('مرحبا، كيف حالك'));
+
 
 
   return (
@@ -151,13 +158,13 @@ const NewChat = () => {
 
           {!ChangeToggle &&
             (ask_pdfmessages?.length === 0 && !ask_pdfloading) && (
-            <h1 className={`${SidebarLayout ? 'arabic-font' : 'english-font'} text-center font-extrabold h1-bold lg:mt-[7.6rem] mt-[2.2rem]`}>
+              <h1 className={`${SidebarLayout ? 'arabic-font' : 'english-font'} text-center font-extrabold h1-bold lg:mt-[7.6rem] mt-[2.2rem]`}>
                 {data.where_knowledge_begins}
               </h1>
             )}
           {ChangeToggle &&
             (AImessages?.length === 0 && !AIloading) && (
-            <h1 className={`${SidebarLayout ? 'arabic-font' : 'english-font'} text-center font-extrabold h1-bold lg:mt-[7.6rem] mt-[2.2rem]`}>
+              <h1 className={`${SidebarLayout ? 'arabic-font' : 'english-font'} text-center font-extrabold h1-bold lg:mt-[7.6rem] mt-[2.2rem]`}>
                 {data.where_knowledge_begins}
               </h1>
             )}
@@ -175,10 +182,10 @@ const NewChat = () => {
                 {AImessages?.map((message: any) => {
                   return (
                     <div key={message.question} className={` w-full flex flex-col  space-y-2 `}  >
-                      <p className="bg-dark-500  self-end  text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-3">
+                      <p className={`${detectLanguageClass(message.question) } bg-dark-500  self-end  text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-3`}>
                         {message.question}
                       </p>
-                      <p className={`bg-dark-100 w-fit rounded-tr-3xl rounded-bl-3xl rounded-br-3xl max-w-full px-7 py-3  text-wrap`} >
+                      <p className={`bg-dark-100 w-fit rounded-tr-3xl rounded-bl-3xl rounded-br-3xl max-w-full px-7 py-2  text-wrap`} >
                         <MarkdownConversion markdownContent={message.answer} speed={14} />
                       </p>
 
@@ -189,7 +196,7 @@ const NewChat = () => {
                   AIloading && (
                     <div className="w-full flex flex-col">
                       <Skeleton className="bg-dark-300 w-[200px] h-9 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl my-3 self-end" />
-                        <Skeleton className={` rounded-tr-3xl rounded-bl-3xl rounded-br-3xl bg-dark-100 w-[300px] h-9  my-2 `} />
+                      <Skeleton className={` rounded-tr-3xl rounded-bl-3xl rounded-br-3xl bg-dark-100 w-[300px] h-9  my-2 `} />
                     </div>
                   )
                 }
@@ -200,11 +207,11 @@ const NewChat = () => {
                 {ask_pdfmessages?.map((message: any) => {
                   return (
                     <div key={message.question} className={`w-full flex flex-col  space-y-2 `} >
-                      <p className="bg-dark-500    self-end text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-3">
+                      <p className={`${detectLanguageClass(message.question) }  bg-dark-500    self-end text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-3`}>
                         {message.question}
                       </p>
                       <p className="bg-dark-100 w-fit  max-w-full px-4 py-2 rounded-tr-3xl rounded-bl-3xl rounded-br-3xl text-wrap ">
-                        <MarkdownConversion markdownContent={message.answer.answer}  speed={18} />
+                        <MarkdownConversion markdownContent={message.answer.answer} speed={18} />
                       </p>
 
                     </div>
