@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import MarkdownToHtml from './markdownToHtml';
 import '@/styles/markdown.css';
+import { useAtom } from 'jotai';
+import { SidebarLayoutAtom } from '@/context/jotaiContext/atom';
 
 interface MarkdownConversionProps {
     markdownContent: string;
@@ -11,11 +13,27 @@ const MarkdownConversion: React.FC<MarkdownConversionProps> = ({ markdownContent
     const [htmlContent, setHtmlContent] = useState<string>('');
     const [displayedContent, setDisplayedContent] = useState<string>(''); // This will be used to gradually display the content
     const [showCursor, setShowCursor] = useState<boolean>(true);
+    const [SidebarLayout] = useAtom(SidebarLayoutAtom);
+    const [textDirection, setTextDirection] = useState<string>('ltr'); // Default to left-to-right
+    const [textClass, setTextClass] = useState<string>('english-text'); // Default to English class
+
+    // Function to detect the language and set text direction and class
+    const detectLanguage = (text: string): string => {
+        const arabicRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+        return arabicRegex.test(text) ? 'rtl' : 'ltr';
+    };
+
+    const detectLanguageClass = (text: string): string => {
+        const arabicRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+        return arabicRegex.test(text) ? 'arabic-font  ' : 'english-font';
+    };
 
     useEffect(() => {
         const convertMarkdown = async () => {
             const html = await MarkdownToHtml(markdownContent);
             setHtmlContent(html);
+            setTextDirection(detectLanguage(html)); // Set text direction based on detected language
+            setTextClass(detectLanguageClass(html)); // Set text class based on detected language
         };
         convertMarkdown();
     }, [markdownContent]);
@@ -53,7 +71,7 @@ const MarkdownConversion: React.FC<MarkdownConversionProps> = ({ markdownContent
     }, [htmlContent, speed]);
 
     return (
-        <div>
+        <div dir={textDirection} className={textClass}>
             <div className="markdown-body" dangerouslySetInnerHTML={{ __html: displayedContent }} />
             {/* {showCursor && <span className="flex-center  w-2 h-2 rounded-full ml-1 bg-black opacity-75 animate-blink"></span>} */}
         </div>

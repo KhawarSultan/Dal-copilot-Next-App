@@ -174,11 +174,11 @@ const NewChat = () => {
               <ScrollArea className={` flex flex-col w-full  my-2     xl:h-[67vh] lg:h-[60vh] h-[64vh] rounded-3xl`} >
                 {AImessages?.map((message: any) => {
                   return (
-                    <div key={message.question} className={`${SidebarLayout ? 'arabic-font' : 'english-font'} w-full flex flex-col  space-y-2 `}  >
-                      <p className="bg-dark-500   self-end text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-3">
+                    <div key={message.question} className={` w-full flex flex-col  space-y-2 `}  >
+                      <p className="bg-dark-500  self-end  text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-3">
                         {message.question}
                       </p>
-                      <p className="bg-dark-100 w-fit  max-w-full px-4 py-2 rounded-tr-3xl rounded-bl-3xl rounded-br-3xl text-wrap ">
+                      <p className={`bg-dark-100 w-fit rounded-tr-3xl rounded-bl-3xl rounded-br-3xl max-w-full px-7 py-3  text-wrap`} >
                         <MarkdownConversion markdownContent={message.answer} speed={14} />
                       </p>
 
@@ -189,7 +189,7 @@ const NewChat = () => {
                   AIloading && (
                     <div className="w-full flex flex-col">
                       <Skeleton className="bg-dark-300 w-[200px] h-9 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl my-3 self-end" />
-                      <Skeleton className="bg-dark-100 w-[300px] h-9 rounded-tr-3xl rounded-bl-3xl rounded-br-3xl my-2 " />
+                        <Skeleton className={` rounded-tr-3xl rounded-bl-3xl rounded-br-3xl bg-dark-100 w-[300px] h-9  my-2 `} />
                     </div>
                   )
                 }
@@ -199,7 +199,7 @@ const NewChat = () => {
               <ScrollArea className="flex flex-col w-full  my-2    lg:h-[62vh] h-[58vh] rounded-3xl " >
                 {ask_pdfmessages?.map((message: any) => {
                   return (
-                    <div key={message.question} className={`w-full flex flex-col  space-y-2 ${SidebarLayout ? 'arabic-font' : 'english-font'}`} >
+                    <div key={message.question} className={`w-full flex flex-col  space-y-2 `} >
                       <p className="bg-dark-500    self-end text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-3">
                         {message.question}
                       </p>
