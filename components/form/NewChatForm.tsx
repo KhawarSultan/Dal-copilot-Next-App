@@ -19,7 +19,7 @@ import { determineDictionary } from "@/lib/determineDictionaries";
 import { useToast } from "../ui/use-toast";
 import { AiTwotoneFilePdf } from "react-icons/ai";
 import { useAtom } from 'jotai'
-import { fileArrayAtom, SidebarLayoutAtom ,PDFuploadAtom, ShowPDFAtom, ChangeToggleAtom } from '@/context/jotaiContext/atom'
+import { fileArrayAtom, SidebarLayoutAtom, PDFuploadAtom, ShowPDFAtom, ChangeToggleAtom, AILoadingAtom } from '@/context/jotaiContext/atom'
 import { MdFilterList } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import messege from "@/data/messege.json";
@@ -48,9 +48,8 @@ const NewChatForm = () => {
   const [ChangeToggle, setChangeToggle] = useAtom(ChangeToggleAtom);
   // const [messages, setMessages] = useAtom(MessagesAtom);
   const [SidebarLayout] = useAtom(SidebarLayoutAtom);
-
-  const { fetchAIResponse } = useAI();
-  const { fetchAskPDFResponse} = useAskPDF();
+  const { fetchAIResponse, AIloading } = useAI();
+  const { fetchAskPDFResponse, ask_pdfloading } = useAskPDF();
   const { fileArray, handleFileUpload, isFileUploading } = useFileUpload();
 
   // const [isFileUploading, setIsFileUploading] = useState<Boolean>(false);
@@ -83,11 +82,18 @@ const NewChatForm = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     const { prompt, pro } = values;
     form.reset();
-    if (ChangeToggle === false) {
-      console.log('Hello from pdf upload');
-      fetchAskPDFResponse(prompt); 
+    if (AIloading === true || ask_pdfloading === true) {
+      toast({
+        title: "Waiting...",
+        description: 'Please Wait for the Response ...',
+        variant: "destructive",
+      });
     } else {
-      fetchAIResponse(prompt); 
+      if (ChangeToggle === false) {
+        fetchAskPDFResponse(prompt);
+      } else {
+        fetchAIResponse(prompt);
+      }
     }
   }
 
@@ -104,7 +110,7 @@ const NewChatForm = () => {
           if (success) {
             console.log(message)
             toast({
-              title: 'Success' ,
+              title: 'Success',
               description: message,
               variant: "primary",
             });
@@ -161,7 +167,7 @@ const NewChatForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={`${SidebarLayout ? 'arabic-font' : 'english-font'} flex lg:gap-4 gap-3 w-full flex-col border rounded-lg  border-dark-200 p-3  border-solid`} 
+        className={`${SidebarLayout ? 'arabic-font' : 'english-font'} flex lg:gap-4 gap-3 w-full flex-col border rounded-lg  border-dark-200 p-3  border-solid`}
       >
         <FormField
           control={form.control}

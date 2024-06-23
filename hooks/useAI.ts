@@ -24,5 +24,5 @@ export const useAI = () => {
     }
   };
 
-  return {  fetchAIResponse };
+  return { fetchAIResponse, AIloading };
 };

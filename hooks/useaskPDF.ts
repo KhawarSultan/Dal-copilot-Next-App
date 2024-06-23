@@ -31,5 +31,5 @@ export const useAskPDF = () => {
     }
   };
 
-  return { fetchAskPDFResponse };
+  return { fetchAskPDFResponse, ask_pdfloading };
 };

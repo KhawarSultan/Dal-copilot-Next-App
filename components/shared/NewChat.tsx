@@ -108,8 +108,6 @@ const NewChat = () => {
       {/* <MarkdownConversion markdownContent={markdownContent} speed={12}  /> */}
       <Ask_pdf />
       <main className={``} >
-
-
         <div className="pt-5 px-6 pb-3  lg:flex-center flex-between ">
           <div className="lg:hidden text-white shadow-xl bg-dark-500 border    rounded-full p-2" onClick={handleClickleftSidebar}>
             <HiMenuAlt4 size={20} stroke-width={0.1} />
@@ -182,10 +180,10 @@ const NewChat = () => {
                 {AImessages?.map((message: any) => {
                   return (
                     <div key={message.question} className={` w-full flex flex-col  space-y-2 `}  >
-                      <p className={`${detectLanguageClass(message.question) } bg-dark-500  self-end  text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-3`}>
+                      <p className={`${detectLanguageClass(message.question) } bg-dark-500  self-end  text-white w-fit max-w-full  px-4 py-2 rounded-tr-3xl rounded-tl-3xl rounded-bl-3xl text-wrap my-4`}>
                         {message.question}
                       </p>
-                      <p className={`bg-dark-100 w-fit rounded-tr-3xl rounded-bl-3xl rounded-br-3xl max-w-full px-7 py-2  text-wrap`} >
+                      <p className={`bg-dark-100 w-fit   rounded-tr-3xl rounded-bl-3xl rounded-br-3xl max-w-full px-6 py-2  text-wrap`} >
                         <MarkdownConversion markdownContent={message.answer} speed={14} />
                       </p>
 
