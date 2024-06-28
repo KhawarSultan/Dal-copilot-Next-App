@@ -11,11 +11,11 @@ interface MarkdownConversionProps {
 
 const MarkdownConversion: React.FC<MarkdownConversionProps> = ({ markdownContent, speed = 50 }) => {
     const [htmlContent, setHtmlContent] = useState<string>('');
-    const [displayedContent, setDisplayedContent] = useState<string>(''); // This will be used to gradually display the content
+    const [displayedContent, setDisplayedContent] = useState<string>(''); 
     const [showCursor, setShowCursor] = useState<boolean>(true);
     const [SidebarLayout] = useAtom(SidebarLayoutAtom);
-    const [textDirection, setTextDirection] = useState<string>('ltr'); // Default to left-to-right
-    const [textClass, setTextClass] = useState<string>('english-text'); // Default to English class
+    const [textDirection, setTextDirection] = useState<string>('ltr'); 
+    const [textClass, setTextClass] = useState<string>('english-text');
 
     // Function to detect the language and set text direction and class
     const detectLanguage = (text: string): string => {

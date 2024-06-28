@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ask_pdfdata from '@/data/ask_pdf'
+// import ask_pdfdata from '@/data/ask_pdf'
 interface PdfMessage {
     question: string;
     answer: string;
@@ -12,6 +12,7 @@ const Ask_pdf = () => {
     return (
         <div>
             <div>
+                ask_pdf
             </div>
         </div>
     );

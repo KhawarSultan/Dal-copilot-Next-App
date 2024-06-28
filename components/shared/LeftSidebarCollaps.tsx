@@ -12,7 +12,6 @@ import { useAtom } from 'jotai'
 import { SidebarLayoutAtom, SliderOpenAtom } from '@/context/jotaiContext/atom'
 import { TbLogout } from "react-icons/tb";
 import { LuArrowLeftFromLine } from "react-icons/lu";
-
 const LeftSidebarCollaps = () => {
     const { language, setLanguage } = useLanguage();
     const data = determineDictionary(language);
@@ -40,15 +39,6 @@ const LeftSidebarCollaps = () => {
     return (
         <div className={`${SidebarLayout && 'arabic-font '}   min-h-screen bg-[#F3F3EE] flex justify-between  flex-col xl:p-5 p-3    `}>
             <div className=" flex-center">
-                {/* <Image
-                    role="button"
-                    src="https://www.dal-demo.live/static/media/icon-open-sidebar.807317206e49601b00213a5d865ca76b.svg"
-                    alt="icon"
-                    width={40}
-                    height={40}
-                    className={`object-cover lg:block hidden  ${SidebarLayout ? 'rotate-180' : ''}`}
-                    onClick={handleClickSlider}
-                /> */}
                 <div onClick={handleClickSlider} className={`p-[9px] flex-center cursor-pointer bg-[#E8E8E3] rounded-full object-cover lg:block hidden`}>
                     <LuArrowLeftFromLine className={`${!SidebarLayout ? 'rotate-180' : ''}`} size={22} />
                 </div>

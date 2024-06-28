@@ -18,20 +18,7 @@ import {
 import messege from "@/data/messege.json";
 import { HiMenuAlt4 } from "react-icons/hi";
 import MarkdownConversion from "../ui/markdown-conversion";
-// import Typewriter from '@/components/ui/typeWriter'
-// import Image from "next/image";
-// import MarkdownPreview from "@uiw/react-markdown-preview";
-// import Markdown from 'react-markdown'
-// import { HiOutlineMenuAlt1 } from "react-icons/hi";
-// import { BsStars } from "react-icons/bs";
-// import { FaRegFilePdf } from "react-icons/fa6";
-// import { TiDocumentText } from "react-icons/ti";
-
-// import { AiOutlineFilePdf } from "react-icons/ai";
-// import { GoDotFill } from "react-icons/go";
-// import MarkdownToHtml from '@/components/ui/markdownToHtml'
 import { useEffect, useRef } from 'react';
-
 import { useAI } from '@/hooks/useAI';
 import Ask_pdf from "../ui/ask_pdf";
 
@@ -61,24 +48,11 @@ const NewChat = () => {
 
   const handleLeftToggle = () => {
     setChangeToggle(true)
-    // if (checkPDFUpload) {
-    //   setShowpdf(false)
-    // }
+    
 
   };
   const handleRightToggle = () => {
     setChangeToggle(false)
-
-    // if (ChangeToggle && checkPDFUpload) {
-    //   setChangeToggle(false);
-    //   setShowpdf(true)
-    // } else {
-    //   toast({
-    //     title: "Instruction",
-    //     description: "Please Attach PDF File First !!",
-    //     variant: "destructive",
-    //   });
-    // }
   };
 
   const handleClickleftSidebar: MouseEventHandler<HTMLDivElement> = () => {
