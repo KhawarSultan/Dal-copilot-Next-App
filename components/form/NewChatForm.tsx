@@ -1,33 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { ChangeEvent, useState, useEffect } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import React, { ChangeEvent } from "react";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { z } from "zod";
-import Image from "next/image";
-import { Switch } from "../ui/switch";
-import { useLanguage } from "@/context/languageContext";
-import { determineDictionary } from "@/lib/determineDictionaries";
-import { useToast } from "../ui/use-toast";
-import { AiTwotoneFilePdf } from "react-icons/ai";
-import { useAtom } from 'jotai'
-import { fileArrayAtom, SidebarLayoutAtom, PDFuploadAtom, ShowPDFAtom, ChangeToggleAtom, AILoadingAtom } from '@/context/jotaiContext/atom'
-import { MdFilterList } from "react-icons/md";
-import { RxCross2 } from "react-icons/rx";
-import messege from "@/data/messege.json";
-import { useSidebar } from '@/context/Sidebarcontext';
-import { Tooltip, Button } from "@material-tailwind/react";
-import { useAI } from '@/hooks/useAI';
-import { useAskPDF } from '@/hooks/useaskPDF';
-import { useFileUpload } from '@/hooks/useFileUpload';
+  zodResolver, useForm, z, Form, FormControl, FormField, FormItem, FormLabel,
+  Input, Switch, useToast, Image, useLanguage, determineDictionary, useAtom,
+  SidebarLayoutAtom, PDFuploadAtom, ShowPDFAtom, ChangeToggleAtom, useAI, useAskPDF, useFileUpload,
+  MdFilterList, useSidebar, AiTwotoneFilePdf, RxCross2, messege, Tooltip, Button
+} from '@/imports/NewChatFormImport';
 
 
 const formSchema = z.object({
@@ -46,29 +24,12 @@ const NewChatForm = () => {
   const [checkPDFUpload, setcheckPDFUpload] = useAtom(PDFuploadAtom);
   const [Showpdf, setShowpdf] = useAtom(ShowPDFAtom);
   const [ChangeToggle, setChangeToggle] = useAtom(ChangeToggleAtom);
-  // const [messages, setMessages] = useAtom(MessagesAtom);
   const [SidebarLayout] = useAtom(SidebarLayoutAtom);
   const { fetchAIResponse, AIloading } = useAI();
   const { fetchAskPDFResponse, ask_pdfloading } = useAskPDF();
   const { fileArray, handleFileUpload, isFileUploading } = useFileUpload();
 
-  // const [isFileUploading, setIsFileUploading] = useState<Boolean>(false);
-  // const [fileArray, setFileArray] = useAtom(fileArrayAtom);
-  // const [loading, setLoading] = useAtom(LoadingAtom);
 
-  // useEffect(() => {
-  //   if (aiLoading) {
-  //     setMessages(aiMessages)
-  //     setLoading(aiLoading)
-  //   }
-  // }, [aiLoading]);
-
-  // useEffect(() => {
-  //   if (pdfLoading) {
-  //     setMessages(pdfMessages[0])
-  //     setLoading(pdfLoading)
-  //   }
-  // }, [pdfLoading]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -150,16 +111,6 @@ const NewChatForm = () => {
     setChangeToggle(true)
     setcheckPDFUpload(false)
   };
-
-  // const handleFetch = async () => {
-  //   if (prompt) {
-  //     if (fileArray.length === 0) {
-  //       await fetchAIResponse(prompt);
-  //     } else {
-  //       await fetchAskPDFResponse(prompt);
-  //     }
-  //   }
-  // };
 
 
  
@@ -260,24 +211,7 @@ const NewChatForm = () => {
           </div>
 
         </div>
-        <section>
-          {/* {Showpdf &&
-            fileArray.slice(-1)[0]?.name && (
-              <div className="flex-center relative select-none text-xs gap-2 bg-[#F3F3EE] border border-[#E8E8E3] px-2 py-1 rounded-md ">
-                <AiTwotoneFilePdf size={24} />
-                <div className="leading-4">
-                  <p className="font-extrabold">{fileArray.slice(-1)[0]?.name}</p>
-                  <div className="flex gap-1">
-                    <p>{fileArray.slice(-1)[0]?.sizeInMb}</p> -
-                    <p className="text-gray-500">{fileArray.slice(-1)[0]?.lastModifiedFormatted}</p>
-                  </div>
-                </div>
-                <div onClick={() => handleDelete(fileArray.slice(-1)[0]?.name)} className="border  transition-all p-1 absolute right-2 top-[10px] ease-in-out bg-[#d1d1cd] hover:bg-[#c7c7c4] cursor-pointer rounded-full ">
-                  <RxCross2 size={10} stroke-width={0.3} />
-                </div>
-              </div>
-            )} */}
-        </section>
+        
       </form>
     </Form>
   );

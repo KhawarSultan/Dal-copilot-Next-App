@@ -21,7 +21,6 @@ import MarkdownConversion from "../ui/markdown-conversion";
 import { useEffect, useRef } from 'react';
 import { useAI } from '@/hooks/useAI';
 import Ask_pdf from "../ui/ask_pdf";
-
 const NewChat = () => {
 
   const { toast } = useToast();
@@ -86,7 +85,7 @@ const NewChat = () => {
     <>
 
       {/* <MarkdownConversion markdownContent={markdownContent} speed={12}  /> */}
-      <Ask_pdf />
+      {/* <Ask_pdf /> */}
       <main className={``} >
         <div className="pt-5 px-6 pb-3  lg:flex-center flex-between ">
           <div className="lg:hidden text-white shadow-xl bg-dark-500 border    rounded-full p-2" onClick={handleClickleftSidebar}>
@@ -121,19 +120,6 @@ const NewChat = () => {
 
 
         <div className="md:px-10 px-5 flex items-center gap-8 order-2 flex-col  md:w-3/4 m-auto justify-center  ">
-
-
-
-          {/* 
-          {((ask_pdfmessages?.length || AImessages?.length !== 0) && !ask_pdfloading || !AIloading) && (
-            <h1 className="text-center font-extrabold h1-bold lg:mt-[7.6rem] mt-[2.2rem]">
-              {data.where_knowledge_begins}
-            </h1>
-          )} */}
-
-
-
-
           {!ChangeToggle &&
             (ask_pdfmessages?.length === 0 && !ask_pdfloading) && (
               <h1 className={`${SidebarLayout ? 'arabic-font' : 'english-font'} text-center font-extrabold h1-bold lg:mt-[7.6rem] mt-[2.2rem]`}>
@@ -147,16 +133,11 @@ const NewChat = () => {
               </h1>
             )}
 
-
-
-
-
-
-          <div className={`w-full  flex flex-col   ${(ask_pdfmessages?.length || AImessages?.length > 0) ? "justify-between h-full " : ""} `}>
+          <div className={`w-full  flex flex-col    ${(ask_pdfmessages?.length || AImessages?.length > 0) ? "justify-between h-full " : ""} `}>
 
             {ChangeToggle ?
               (AImessages?.length > 0 || AIloading) &&
-              <ScrollArea  className={` flex flex-col w-full  my-2     xl:h-[67vh] lg:h-[60vh] h-[64vh] rounded-3xl`} >
+              <ScrollArea  className={` flex flex-col w-full  my-2    xl:h-[67vh] lg:h-[60vh] h-[64vh] rounded-3xl`} >
                 {AImessages?.map((message: any,index:number) => {
                   return (
                     <div  key={message.question} className={` w-full flex flex-col  space-y-2 `}  >
@@ -205,14 +186,6 @@ const NewChat = () => {
                 }
               </ScrollArea>
             }
-
-
-
-
-
-
-
-
             <NewChatForm />
           </div>
 
@@ -230,8 +203,6 @@ const NewChat = () => {
               ))}
             </div>
           )}
-
-
         </div>
       </main>
     </>

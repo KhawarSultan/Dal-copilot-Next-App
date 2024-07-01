@@ -66,15 +66,7 @@ const LeftSidebar = () => {
               <div onClick={handleClickSlider} className={`p-[9px] flex-center cursor-pointer bg-[#E8E8E3] rounded-full object-cover lg:block hidden`}>
                 <LuArrowLeftFromLine className={`${SidebarLayout ? 'rotate-180' : ''}`} size={22} />
               </div>
-              {/* <Image
-                role="button"
-                src="https://www.dal-demo.live/static/media/icon-close-sidebar.f533511f4b93ab354ecd666a1324e890.svg"
-                alt="icon"
-                width={40}
-                height={40}
-                className={`${SidebarLayout ? 'rotate-180' : ''} object-cover lg:block hidden`}
-                onClick={handleClickSlider}
-              /> */}
+             
             </div>
           </div>
 

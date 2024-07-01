@@ -18,8 +18,8 @@ export const ShowPDFAtom = atom(true);
 
 export const ChangeToggleAtom = atom(true);
 export const SliderOpenAtom = atom(true);
+export const AILoadingAtom = atom(false);
 export const fileArrayAtom = atom<FileObject[]>([]);
 export const AIMessagesAtom = atom<Message[]>([]);
-export const AILoadingAtom = atom(false);
 export const Ask_PDFMessagesAtom = atom<Message[]>([]);
 export const Ask_PDFLoadingAtom = atom(false);
